@@ -1,4 +1,3 @@
-
 const canvas = document.getElementById("renderCanvas");
 const engine = new BABYLON.Engine(canvas, true);
 let input = { left: false, right: false, jump: false };
@@ -25,16 +24,20 @@ const createScene = async () => {
 
   new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
 
+  // Chão
   const ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 300, height: 10 }, scene);
   const groundMat = new BABYLON.StandardMaterial("groundMat", scene);
   ground.material = groundMat;
 
+  // CENÁRIO DE FUNDO
   const bgPlane = BABYLON.MeshBuilder.CreatePlane("bg", { width: 300, height: 10 }, scene);
   bgPlane.position.z = 5;
   bgPlane.position.y = 2.5;
   const bgMat = new BABYLON.StandardMaterial("bgMat", scene);
+  bgMat.diffuseTexture = new BABYLON.Texture("assets/cenario-campina.png", scene); // Aqui é o cenário
   bgPlane.material = bgMat;
 
+  // Importar Jacaré
   const result = await BABYLON.SceneLoader.ImportMeshAsync("", "assets/", "Jacare.glb", scene);
   const jacare = result.meshes[0];
   const skeleton = result.skeletons[0];
@@ -42,6 +45,7 @@ const createScene = async () => {
   jacare.position = new BABYLON.Vector3(0, 0.5, 0);
   camera.lockedTarget = jacare;
 
+  // Animações
   let currentAnim = null;
   const animations = {};
 
@@ -67,6 +71,7 @@ const createScene = async () => {
 
   playAnim("idle");
 
+  // Movimento e troca de animações
   scene.onBeforeRenderObservable.add(() => {
     const delta = engine.getDeltaTime() / 1000;
     let moved = false;
