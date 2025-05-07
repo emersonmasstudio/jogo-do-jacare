@@ -36,7 +36,7 @@ const createScene = async () => {
   bgMat.diffuseTexture = new BABYLON.Texture("assets/cenario-campina.png", scene);
   bgPlane.material = bgMat;
 
-  const result = await BABYLON.SceneLoader.ImportMeshAsync("", "assets/", "Jacare.glb.txt", scene);
+  const result = await BABYLON.SceneLoader.ImportMeshAsync("", "assets/", "Jacare.glb", scene);
   const jacare = result.meshes[0];
   const skeleton = result.skeletons[0];
   jacare.scaling = new BABYLON.Vector3(1.5, 1.5, 1.5);
