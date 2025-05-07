@@ -54,10 +54,10 @@ const createScene = async () => {
     animResult.meshes.forEach(m => m.dispose());
   };
 
-  await loadAnim("idle", "Idle.glb.txt");
-  await loadAnim("walk", "Walking.glb.txt");
-  await loadAnim("run", "Running.glb.txt");
-  await loadAnim("jump", "Jumping.glb.txt");
+  await loadAnim("idle", "Idle.glb");
+  await loadAnim("walk", "Walking.glb");
+  await loadAnim("run", "Running.glb");
+  await loadAnim("jump", "Jumping.glb");
 
   const playAnim = (name) => {
     if (currentAnim === name) return;
